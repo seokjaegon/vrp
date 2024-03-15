@@ -9,6 +9,7 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -16,11 +17,14 @@ import kr.co.icia.vrp.semi.util.kakao.Document;
 import kr.co.icia.vrp.semi.util.kakao.KakaoAddress;
 import kr.co.icia.vrp.semi.util.kakao.KakaoDirections;
 import kr.co.icia.vrp.semi.util.kakao.KakaoDirections.Route.Section.Road;
+
 import lombok.Getter;
 import lombok.Setter;
 
 public class KakaoApiUtil {
-  private static final String REST_API_KEY = "3963d4acc3e66c56c54f1c5090486820";
+
+  
+  private static final String REST_API_KEY = "9e16e889b34d03b2c8982d5043e6050b";
 
   /**
    * 키워드 장소 검색
@@ -161,6 +165,10 @@ public class KakaoApiUtil {
     Document document = documents.get(0);
     return new Point(document.getX(), document.getY());
   }
+  
+ 
+
+
 
   @Setter
   @Getter
@@ -175,6 +183,10 @@ public class KakaoApiUtil {
     private String address;
     @JsonIgnore
     private String id;
+    
+    public Point() {
+      
+    }
 
     public Point(Double x, Double y) {
       this.x = x;
