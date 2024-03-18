@@ -52,10 +52,15 @@ public class MainController {
   @ResponseBody
   public JsonResult getPoi(@RequestParam double x, @RequestParam double y) throws IOException, InterruptedException {
     Point center = new Point(x, y);// 중심좌표
+    // 중심좌표 주변의 약국 리스트
     List<Point> pointList = KakaoApiUtil.getPointByKeyword("약국", center);
+    // 약국 정보를 저장할 리스트
     List<Node> nodeList = new ArrayList<>();
+    // 주변약국 리스트
     for (Point point : pointList) {
+      // id로 주변약국 정보를 가져옴.
       Node node = nodeService.getOne(Long.valueOf(point.getId()));
+      // 만약 약국 정보가 없으면 약국 정보를 저장한다.
       if (node == null) {
         node = new Node();
         node.setId(Long.valueOf(point.getId()));// 노드id
@@ -68,17 +73,23 @@ public class MainController {
         node.setModDt(new Date());// 수정일시
         nodeService.add(node);
       }
+      // 약국 정보를 리스트에 저장
       nodeList.add(node);
     }
-
+    // 총 거리를 0으로 초기값 설정
     int totalDistance = 0;
+    // 총 시간을 0으로 초기값 설정
     int totalDuration = 0;
     List<Point> totalPathPointList = new ArrayList<>();
     for (int i = 1; i < nodeList.size(); i++) {
+      // 시작 약국정보
       Node prev = nodeList.get(i - 1);
+      // 다음 약국정보
       Node next = nodeList.get(i);
-
+      
+      
       NodeCostParam nodeCostParam = new NodeCostParam();
+      // 
       nodeCostParam.setStartNodeId(prev.getId());
       nodeCostParam.setEndNodeId(next.getId());
       NodeCost nodeCost = nodeCostService.getOneByParam(nodeCostParam);
@@ -122,7 +133,7 @@ public class MainController {
         nodeCost.setModDt(new Date());// 수정일시
         nodeCostService.add(nodeCost);
       }
-
+      
       totalDistance += nodeCost.getDistanceMeter();
       totalDuration += nodeCost.getDurationSecond();
       totalPathPointList.addAll(new ObjectMapper().readValue(nodeCost.getPathJson(), new TypeReference<List<Point>>() {
@@ -177,7 +188,9 @@ public class MainController {
         nodeCostMap.get(startNodeId).put(endNodeId, nodeCost);
       }
     }
+    // 경로 최적화된 노드 리스트
     List<Node> vrpNodeList = new ArrayList<>();
+    
     VrpResult vrpResult = vrpService.getVrpResult();
     for (VrpVehicleRoute vrpVehicleRoute : vrpResult.getVrpVehicleRouteList()) {
       if ("deliverShipment".equals(vrpVehicleRoute.getActivityName())) {

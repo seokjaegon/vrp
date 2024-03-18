@@ -1,45 +1,62 @@
-<link href="https://getbootstrap.com/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet"
- integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<script src="https://getbootstrap.com/docs/5.3/dist/js/bootstrap.bundle.min.js"
- integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<link href="https://getbootstrap.com/docs/5.3/examples/sidebars/sidebars.css" rel="stylesheet">
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0ccbdeeeeb4de91d3ca76200d460fd56"></script>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<link
+	href="https://getbootstrap.com/docs/5.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+<script
+	src="https://getbootstrap.com/docs/5.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+	crossorigin="anonymous"></script>
+<link
+	href="https://getbootstrap.com/docs/5.3/examples/sidebars/sidebars.css"
+	rel="stylesheet">
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=62f907aab02429790c946754b7fe07e2"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+	crossorigin="anonymous"></script>
 <main class="d-flex flex-nowrap">
- <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-body-tertiary border border-r-1" style="width: 380px;">
-   <div
-     class="d-flex align-items-center flex-shrink-0 p-3 link-body-emphasis text-decoration-none">
-     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="#4ae39c" viewBox="0 0 256 256"
-       class="me-2">
-       <path d="M232,128A104,104,0,1,1,128,24,104.13,104.13,0,0,1,232,128Z"></path>
+	<div
+		class="d-flex flex-column align-items-stretch flex-shrink-0 bg-body-tertiary border border-r-1"
+		style="width: 380px;">
+		<div
+			class="d-flex align-items-center flex-shrink-0 p-3 link-body-emphasis text-decoration-none">
+			<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+				fill="#4ae39c" viewBox="0 0 256 256" class="me-2">
+       <path
+					d="M232,128A104,104,0,1,1,128,24,104.13,104.13,0,0,1,232,128Z"></path>
      </svg>
-     <span class="fs-5 fw-semibold">경로 최적화 결과</span>
-   </div>
-<div class="d-flex flex-wrap py-3 px-2 gap-3 align-items-center justify-content-center border-bottom">
-     <div class="d-flex flex-column align-items-center">
-       <div id="totalVisit">0곳</div>
-       <div class="fw-light" style="font-size:.75rem">경유지</div>
-     </div>
-     <div class="border-start border-2 h-50"></div>
-     <div class="d-flex flex-column align-items-center">
-       <div id="totalDistance">0km</div>
-       <div class="fw-light" style="font-size:.75rem">이동거리</div>
-     </div>
-     <div class="border-start border-2 h-50"></div>
-     <div class="d-flex flex-column align-items-center">
-       <div id="totalDuration">0분</div>
-       <div class="fw-light" style="font-size:.75rem">이동시간</div>
-     </div>
-   </div>
-   <div class="list-group scrollarea px-3 flex-grow-1" id="nodeList">
-   </div>
+			<span class="fs-5 fw-semibold">경로 최적화 결과</span>
+		</div>
+		<div
+			class="d-flex flex-wrap py-3 px-2 gap-3 align-items-center justify-content-center border-bottom">
+			<div class="d-flex flex-column align-items-center">
+				<div id="totalVisit">0곳</div>
+				<div class="fw-light" style="font-size: .75rem">경유지</div>
+			</div>
+			<div class="border-start border-2 h-50"></div>
+			<div class="d-flex flex-column align-items-center">
+				<div id="totalDistance">0km</div>
+				<div class="fw-light" style="font-size: .75rem">이동거리</div>
+			</div>
+			<div class="border-start border-2 h-50"></div>
+			<div class="d-flex flex-column align-items-center">
+				<div id="totalDuration">0분</div>
+				<div class="fw-light" style="font-size: .75rem">이동시간</div>
+			</div>
+		</div>
+		<div class="list-group scrollarea px-3 flex-grow-1" id="nodeList">
+		</div>
 
-   <div class="d-flex align-items-center justify-content-center p-3">
-     <button type="button" class="btn btn-dark w-100" onclick="goVrp();">경로 최적화</button>
-   </div>
- </div>
- <div id="map" class="w-100"></div>
- <button type="button" class="btn btn-success" style="position: fixed; top: 20px; right: 20px; z-index: 1030;" onclick="searchPoi();">주변 약국 검색</button>
+		<div class="d-flex align-items-center justify-content-center p-3">
+			<button type="button" class="btn btn-dark w-100" onclick="goVrp();">경로
+				최적화</button>
+		</div>
+	</div>
+	<div id="map" class="w-100"></div>
+	<button type="button" class="btn btn-success"
+		style="position: fixed; top: 20px; right: 20px; z-index: 1030;"
+		onclick="searchPoi();">주변 약국 검색</button>
 
 </main>
 <script>
@@ -56,7 +73,9 @@ function searchPoi() {
   const x = latlng.getLng();
   const y = latlng.getLat();
   $.ajax({
+	  // MainController에서 /poi 호출
     url: '/poi',
+    // 중심 좌표값을 MainController로 넘긴다.
     data: {
       x: x,
       y: y
@@ -107,6 +126,7 @@ function displayData(data) {
         </div>
       </a>
     `;
+    // node 하나당 마커를 찍음
     drawMarker(node, bounds);
   }
  
@@ -128,6 +148,7 @@ function secondsToHoursMinutes(seconds) {
 	   const formattedMinutes = minutes.toString().padStart(2, '0');
 	   return `${formattedHours}${formattedMinutes}분`;
 	 }
+	 
 	  function drawMarker(node, bounds) {
 	   const position = new kakao.maps.LatLng(node.y, node.x);
 	   bounds.extend(position);
@@ -171,7 +192,8 @@ function secondsToHoursMinutes(seconds) {
 	      POLYLINE.setMap(map);
 	    }
 	  }
-
+	  
+	  // 중심 좌표를 움직이는 함수
 	  function panTo(nodeId) {
 		   clearInfoWindow();
 		   const node = NODE_MAP[nodeId];
@@ -182,11 +204,13 @@ function secondsToHoursMinutes(seconds) {
 		   // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
 		   map.panTo(moveLatLon);
 		 }
+	  
 		 function clearInfoWindow() {
 		   for(const nodeId in INFO_MAP) {
 		     INFO_MAP[nodeId].close();
 		   }
-		 }     
+		 }    
+		 
 		 function clearNode() {
 		   for(const nodeId in NODE_MAP) {
 		     MARKER_MAP[nodeId].setMap(null);
